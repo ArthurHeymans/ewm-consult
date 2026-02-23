@@ -171,6 +171,7 @@ Buffer source."
       (ewm-consult--mode-enable)
     (ewm-consult--mode-disable)))
 
+;;;###autoload
 (defun ewm-consult--install-mode-hook ()
   "Install hook to track `ewm-mode' toggles."
   (add-hook 'ewm-mode-hook #'ewm-consult--sync-with-ewm-mode)
@@ -178,10 +179,9 @@ Buffer source."
   (when (bound-and-true-p ewm-mode)
     (ewm-consult--mode-enable)))
 
-(if (boundp 'ewm-mode-hook)
-    (ewm-consult--install-mode-hook)
-  (with-eval-after-load 'ewm
-    (ewm-consult--install-mode-hook)))
+;;;###autoload
+(with-eval-after-load 'ewm
+  (ewm-consult--install-mode-hook))
 
 (provide 'ewm-consult)
 ;;; ewm-consult.el ends here
